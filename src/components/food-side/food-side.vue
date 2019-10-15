@@ -40,6 +40,7 @@
           <el-menu-item-group>
             <el-menu-item index="5-1" @click="toFoodKindComponent()">种类配置</el-menu-item>
             <el-menu-item index="5-2" @click="toFoodAddComponent()">食物配置</el-menu-item>
+            <el-menu-item index="5-3" @click="toFoodTitleComponent()">标题配置</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -61,6 +62,11 @@ export default class SideBar extends Vue {
   toFoodAddComponent() {
     this.$router.push({
       path: "/home/foodAdd"
+    });
+  }
+  toFoodTitleComponent() {
+    this.$router.push({
+      path: "/home/sysTitle"
     });
   }
 }

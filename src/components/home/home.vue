@@ -18,23 +18,20 @@
 </template>
 
 <script lang="ts">
-	import {
-		Vue,
-		Component
-	} from "vue-property-decorator";
-	import Header from "../food-header/food-header.vue";
-	import SideBar from "../food-side/food-side.vue";
-	import TimeSheet from "../food-timeSheet/food-timesheet.vue";
-	@Component({
-		components: {
-			Header,
-			SideBar,
-			TimeSheet
-		}
-	})
-	export default class Home extends Vue {}
+import { Vue, Component } from "vue-property-decorator";
+import Header from "../food-header/food-header.vue";
+import SideBar from "../food-side/food-side.vue";
+import TimeSheet from "../food-timeSheet/food-timesheet.vue";
+@Component({
+  components: {
+    Header,
+    SideBar,
+    TimeSheet
+  }
+})
+export default class Home extends Vue {}
 </script>
 
 <style lang="less" scoped>
-	@import "./home.less";
+@import "./home.less";
 </style>

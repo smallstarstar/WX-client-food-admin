@@ -37,6 +37,9 @@ const ValidatorRules = {
     ],
     foodKindName: [
         { required: true, message: '种类名称为空', trigger: 'blur' },
+    ],
+    titleName: [
+        { required: true, message: '标题不能为空', trigger: 'blur' },
     ]
 
 }

@@ -19,7 +19,7 @@ axios.interceptors.request.use((config) => {
   }
   let token = localStorage.getItem('token')
   if (token) {
-    token = 'bearer' + ' ' + token.replace(/'|"/g, '') // 把token加入到默认请求参数中
+    token = 'bearer ' + token.replace(/'|"/g, '') // 把token加入到默认请求参数中
 
     config.headers.common['Authorization'] = token
   }

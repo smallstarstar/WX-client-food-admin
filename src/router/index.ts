@@ -20,6 +20,10 @@ const router = new Router({
         {
           path: 'foodkind',
           component: () => import('@/views/food-config/food-kind.vue')
+        },
+        {
+          path: 'sysTitle',
+          component: () => import('@/views/sys-title/sys-title.vue')
         }
       ]
     }

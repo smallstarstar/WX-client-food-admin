@@ -6,7 +6,16 @@ const FoodUrl = {
     // 分页获取种类信息
     getFoodKindByPage: '/api/v1/getkindDataBypage',
     // 根据商品种类的id下架商品
-    deleteFoodKindById:'/api/v1/deleteFoodKind?id='
+    deleteFoodKindById: '/api/v1/deleteFoodKind?id=',
+
+    // 配置标题的信息
+    saveTitleInfos: '/api/v1/titleInfos',
+
+    // 获取标题的信息集合
+    getTitle: '/api/v1/getTitle',
+
+    // 根据id删除标题
+    delelteTitleByid: '/api/v1/delteById?id='
 }
 
 export default FoodUrl;

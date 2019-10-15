@@ -23,5 +23,7 @@ export enum ValitorName {
 
     foodDec = 'foodDec',
 
-    foodKindName = 'foodKindName'
+    foodKindName = 'foodKindName',
+    
+    titleName = 'titleName'
 }

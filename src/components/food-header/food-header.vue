@@ -31,7 +31,7 @@
 			<!-- 查看借阅记录 -->
 			<!-- 退出登陆 -->
 			<div class="backSystem">
-				<el-button @click="goOutSystem()">退出</el-button>
+				<el-button @click="goOutSystem()" type="primary">退出</el-button>
 			</div>
 		</div>
 	</div>
