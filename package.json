@@ -1,5 +1,5 @@
 {
-  "name": "typevue",
+  "name": "wx-food-admin",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "shi",
@@ -15,6 +15,7 @@
     "element-ui": "^2.7.2",
     "firstnpmvue": "^1.0.0",
     "iview": "^1.0.1",
+    "jwt-decode": "^2.2.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "pubsub-js": "^1.7.0",

@@ -43,12 +43,19 @@
                     :on-remove="handleRemove"
                     :on-change="changeImg"
                     multiple
-                    :limit="1"
+                    :limit="3"
                 ><i class="el-icon-plus"></i>
             </el-upload> 
             </div>
-            <!-- 展示 -->
-             <!-- <img v-if="imageUrl" :src="imageUrl" class="avatar"> -->
+            <div class="advise_food">
+                <el-switch  @change="getChange($event)"
+                v-model="value1"
+                active-text="非推荐食品"
+                inactive-text="推荐食品"
+                 active-color="#13ce66"
+                inactive-color="#ff4949">
+                </el-switch>
+            </div>
         </div>  
     </div>
 </template>
@@ -60,44 +67,53 @@ import ValidatorRules from "../utils/validator";
 import { ValitorName } from "../common/enums/valitor";
 import getTimeService from "../common/getTime";
 import { Getter } from "vuex-class";
-import foodServices from '../api/foodMessageServices/food-message-services';
-
+import foodServices from "../api/foodMessageServices/food-message-services";
 
 @Component({})
-export default class FoodKind extends Vue {
+export default class FoodAdd extends Vue {
   @Getter("userInfoMessages") userInfoMessages!: any;
   private foodInfo: any = new FoodInfo();
   private rules: any = ValidatorRules;
   private rulusName: any = ValitorName;
   private isloading: any = false;
-  private imageUrl: any = '';
+  private value1: any = true;
 
   changeImg(file: any) {
-    this.foodInfo.foodPicture = URL.createObjectURL(file.raw);
+    const files = [];
+    files.push(file.raw);
+    const render = new FileReader();
+    render.readAsDataURL(file.raw);
+    render.onload = (e: any) => {
+      const dataImg = e.target.result;
+      this.foodInfo.foodPicture = dataImg;
+    };
   }
-  mounted() {}
-
   changeUpload() {}
-  handleRemove() {
+  handleRemove() {}
+  getChange(e) {
+    this.value1 = e;
   }
   addFood(foodInfo) {
-    (this.$refs[foodInfo] as any).validate( async(val: any) => {
+    (this.$refs[foodInfo] as any).validate(async (val: any) => {
       if (val) {
-          this.isloading = true;
-          this.foodInfo.createdPeo = 'xiaozhang';
-          this.foodInfo.createdId = '22222';
-          this.foodInfo.foodTime = getTimeService.timeFunService();
-          const data = await foodServices.addFoodInfo(this.foodInfo);
-          if(data) {
-              this.foodInfo = {};
-              this.isloading = false;
-              (this.$refs.upload as any).clearFiles();
-          } else {
-               this.foodInfo = {};
-              this.isloading = false;
-
-              this.$message({type:'error',message:'添加失败'})
-          }
+        this.isloading = true;
+        this.foodInfo.createdPeo = "xiaozhang";
+        this.foodInfo.createdId = "22222";
+        this.foodInfo.foodCommand = this.value1;
+        this.foodInfo.foodTime = getTimeService.timeFunService();
+        const data = await foodServices.addFoodInfo(this.foodInfo);
+        console.log(data);
+        if (data) {
+          this.foodInfo = {};
+          this.isloading = false;
+          this.value1 = true;
+          (this.$refs.upload as any).clearFiles();
+        } else {
+          this.foodInfo = {};
+          this.isloading = false;
+          this.value1 = true;
+          this.$message({ type: "error", message: "添加失败" });
+        }
       }
     });
   }
@@ -105,5 +121,5 @@ export default class FoodKind extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import "./food-kind.less";
+@import "./food-add.less";
 </style>

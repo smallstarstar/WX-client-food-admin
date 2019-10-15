@@ -21,5 +21,7 @@ export enum ValitorName {
 
     foodPrice = 'foodPrice',
 
-    foodDec = 'foodDec'
+    foodDec = 'foodDec',
+
+    foodKindName = 'foodKindName'
 }

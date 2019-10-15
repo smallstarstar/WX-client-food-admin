@@ -36,6 +36,7 @@ import RegisterForm from "../registers/register.vue";
 import Pubsub from "pubsub-js";
 import EventKeys from "../../common/eventKeys/user-event";
 import { Action } from "vuex-class";
+import jwt_decode from "jwt-decode";
 
 @Component({
   components: {
@@ -57,17 +58,18 @@ export default class LoginComponent extends Vue {
         const data: any = await userInfoMessageServices.userLogin(
           this.userInfo
         );
-        if (data.code === LoginCode.messageSuccess) {
-          this.$message({ type: "success", message: data.message });
-          // localStorage.setItem('userInfo',JSON.stringify(data.data));
-          // const dd = JSON.parse(localStorage.getItem(useInfo));
+        if (data.messageInfo.code === LoginCode.messageSuccess) {
+          this.$message({ type: "success", message: data.messageInfo.message });
           // 将数据存入共享数据层中
-          this.setUserInfoMessage(data.data);
-          this.$router.push({path:'/home/foodKind'})
+          this.setUserInfoMessage(data.messageInfo.data);
+          // 登陆成功将token存进数据
+          const token = data.token;
+          localStorage.setItem("token", token);
+          this.$router.push({ path: "/home" });
         }
         // 用户不存在
-        if (data.code === LoginCode.messageNotFound) {
-          this.$message({ type: "error", message: data.message });
+        if (data.messageInfo.code === LoginCode.messageNotFound) {
+          this.$message({ type: "error", message: data.messageInfo.message });
           this.cleanAll(useInfo);
         }
         // 信息错误

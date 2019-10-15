@@ -16,4 +16,6 @@ export class FoodInfo {
 
     createdId?: String;
 
+    foodCommand?:Boolean;
+
 }

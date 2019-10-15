@@ -9,12 +9,20 @@ Vue.config.productionTip = false;
 import axios from 'axios';
 import qs from 'Qs';
 
+
+
 // 请求参数的拦截
-axios.interceptors.request.use((config)=>{
-  const {method,data} = config;
-  if(method.toLowerCase() === 'post' && typeof data === 'object') {
-         config.data = qs.stringify(data);
-     }
+axios.interceptors.request.use((config) => {
+  const { method, data } = config;
+  if (method.toLowerCase() === 'post' && typeof data === 'object') {
+    config.data = qs.stringify(data);
+  }
+  let token = localStorage.getItem('token')
+  if (token) {
+    token = 'bearer' + ' ' + token.replace(/'|"/g, '') // 把token加入到默认请求参数中
+
+    config.headers.common['Authorization'] = token
+  }
   return config
 })
 
